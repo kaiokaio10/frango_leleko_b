@@ -3,9 +3,13 @@ package br.com.frango.leleko.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.collection.spi.PersistentBag;
+import org.springframework.stereotype.Component;
+
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
+@Component
 public class DozerMapper {
 
 	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
@@ -21,5 +25,6 @@ public class DozerMapper {
 		}
 		return destinationObjects;
 	}
+	
 
 }

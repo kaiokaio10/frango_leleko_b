@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/Item/v1")
+@RequestMapping("/api/item")
 @Tag(name = "Item", description = "Endpoints Para os Itens")
+@CrossOrigin("http://localhost:4200")
 public class ItemController {
 	
 	@Autowired
@@ -67,6 +69,23 @@ public class ItemController {
 	)
 	public ItemVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
+	}
+	@GetMapping(value = "/pesquisar/{nome}")
+	@Operation(summary = "Finds a Item", description = "Finds a Item",
+	tags = {"Item"},
+	responses = {
+			@ApiResponse(description = "Success", responseCode = "200",
+					content = @Content(schema = @Schema(implementation = ItemVO.class))
+					),
+			@ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+			@ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),
+	}
+			)
+	public List<ItemVO> findByItem(@PathVariable(value = "nome") String nome) {
+		return service.pesquisarItem(nome);
 	}
 	
 	@PostMapping

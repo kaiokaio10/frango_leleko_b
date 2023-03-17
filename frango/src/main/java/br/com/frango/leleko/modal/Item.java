@@ -30,57 +30,58 @@ public class Item implements Serializable {
 		
 		@Column(name = "valor")
 		private Double valor;
+		
+		@Column(name = "medida")
+		private String medida;
 
 		public Item() {
 			super();
 		}
 
-
 		public long getId() {
 			return id;
 		}
-
 
 		public void setId(long id) {
 			this.id = id;
 		}
 
-
 		public String getNome() {
 			return nome;
 		}
-
 
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
 
-
 		public Double getQuantidade() {
 			return quantidade;
 		}
-
 
 		public void setQuantidade(Double quantidade) {
 			this.quantidade = quantidade;
 		}
 
-
 		public Double getValor() {
 			return valor;
 		}
-
 
 		public void setValor(Double valor) {
 			this.valor = valor;
 		}
 
+		public String getMedida() {
+			return medida;
+		}
+
+		public void setMedida(String medida) {
+			this.medida = medida;
+		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(id, nome, quantidade, valor);
+			return Objects.hash(id, medida, nome, quantidade, valor);
 		}
-
 
 		@Override
 		public boolean equals(Object obj) {
@@ -91,9 +92,12 @@ public class Item implements Serializable {
 			if (getClass() != obj.getClass())
 				return false;
 			Item other = (Item) obj;
-			return id == other.id && Objects.equals(nome, other.nome) && Objects.equals(quantidade, other.quantidade)
-					&& Objects.equals(valor, other.valor);
+			return id == other.id && Objects.equals(medida, other.medida) && Objects.equals(nome, other.nome)
+					&& Objects.equals(quantidade, other.quantidade) && Objects.equals(valor, other.valor);
 		}
+
+
+		
 		
 		
 		

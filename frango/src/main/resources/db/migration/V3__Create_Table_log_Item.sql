@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `item` (
+CREATE TABLE IF NOT EXISTS `log_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) ,
   `quantidade` double,

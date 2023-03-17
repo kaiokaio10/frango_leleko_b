@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mapping.AccessOptions.SetOptions.Propagation;
 import org.springframework.stereotype.Service;
+
+import com.github.dozermapper.core.Mapping;
 
 import br.com.frango.leleko.controller.ItemController;
 import br.com.frango.leleko.data.vo.ItemVO;
@@ -16,6 +19,7 @@ import br.com.frango.leleko.exceptions.ResourceNotFoundException;
 import br.com.frango.leleko.mapper.DozerMapper;
 import br.com.frango.leleko.modal.Item;
 import br.com.frango.leleko.repositories.ItemRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ItemService {
@@ -25,9 +29,10 @@ public class ItemService {
 	@Autowired
 	ItemRepository repository;
 	
+	@Autowired
+	private DozerMapper mapper;
+	
 	public List<ItemVO> findAll() {
-
-		logger.info("Finding all item!");
 
 		var item = DozerMapper.parseListObjects(repository.findAll(), ItemVO.class);
 		item
@@ -37,8 +42,6 @@ public class ItemService {
 	}
 
 	public ItemVO findById(Long id) {
-		
-		logger.info("Finding one item!");
 		
 		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
@@ -83,6 +86,14 @@ public class ItemService {
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		repository.delete(entity);
+	}
+	public List<ItemVO> pesquisarItem(String nome) {
+		
+		var item = DozerMapper.parseListObjects(repository.findByNome(nome), ItemVO.class);
+		item
+			.stream()
+			.forEach(p -> p.add(linkTo(methodOn(ItemController.class).findById(p.getKey())).withSelfRel()));
+		return item;
 	}
 
 }
