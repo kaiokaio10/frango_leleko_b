@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.HelloWorld
+web: bundle exec rails server -p $PORT
