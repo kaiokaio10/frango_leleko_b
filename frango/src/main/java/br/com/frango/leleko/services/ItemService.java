@@ -24,7 +24,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class ItemService {
 	
-	private Logger logger = Logger.getLogger(Service.class.getName());
 	
 	@Autowired
 	ItemRepository repository;
@@ -54,7 +53,6 @@ public class ItemService {
 
 		if (item == null) throw new RequiredObjectIsNullException();
 		
-		logger.info("Creating one item!");
 		var entity = DozerMapper.parseObject(item, Item.class);
 		var vo =  DozerMapper.parseObject(repository.save(entity), ItemVO.class);
 		vo.add(linkTo(methodOn(ItemController.class).findById(vo.getKey())).withSelfRel());
@@ -65,7 +63,6 @@ public class ItemService {
 
 		if (item == null) throw new RequiredObjectIsNullException();
 		
-		logger.info("Updating one item!");
 		
 		var entity = repository.findById(item.getKey())
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
@@ -81,7 +78,6 @@ public class ItemService {
 	
 	public void delete(Long id) {
 		
-		logger.info("Deleting one item!");
 		
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
