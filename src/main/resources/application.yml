@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/frango_leleko?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 1021
+    url: jdbc:mysql://mysqlserver.c4fxinpuyiw7.sa-east-1.rds.amazonaws.com:3306/frango_leleko?createDatabaseIfnotExist=true&useTimezone=true&serverTimezone=UTC
+    username: admin
+    password: admin1021
   jpa:
     hibernate:
       ddl-auto: none
