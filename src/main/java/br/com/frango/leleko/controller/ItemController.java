@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/item")
 @Tag(name = "Item", description = "Endpoints Para os Itens")
-@CrossOrigin("http://frangoleleko.s3-website-sa-east-1.amazonaws.com")
+@CrossOrigin("http://localhost:4200")
 public class ItemController {
 	
 	@Autowired
