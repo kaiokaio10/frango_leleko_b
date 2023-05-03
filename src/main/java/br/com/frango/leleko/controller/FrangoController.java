@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/venda")
 @Tag(name = "Frango", description = "Endpoints Para os Frango")
-@CrossOrigin("https://celular--frangodoleleko.netlify.app/")
+@CrossOrigin("https://frangodoleleko.netlify.app")
 public class FrangoController {
 	
 	@Autowired
